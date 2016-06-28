@@ -34,27 +34,27 @@ module Champloo
       end
 
       def decode_byte(i)
-        return i + 1, *@data[i].unpack('c')
+        return i + 1, Champloo::NBT::Byte.new(*@data[i].unpack('c'))
       end
 
       def decode_short(i)
-        return i + 2, *@data[i, 2].unpack('s>')
+        return i + 2, Champloo::NBT::Short.new(*@data[i, 2].unpack('s>'))
       end
 
       def decode_int(i)
-        return i + 4, *@data[i, 4].unpack('i>')
+        return i + 4, Champloo::NBT::Int.new(*@data[i, 4].unpack('i>'))
       end
 
       def decode_long(i)
-        return i + 8, *@data[i, 8].unpack('q>')
+        return i + 8, Champloo::NBT::Long.new(*@data[i, 8].unpack('q>'))
       end
 
       def decode_float(i)
-        return i + 4, *@data[i, 4].unpack('g')
+        return i + 4, Champloo::NBT::Float.new(*@data[i, 4].unpack('g'))
       end
 
       def decode_double(i)
-        return i + 8, *@data[i, 8].unpack('G')
+        return i + 8, Champloo::NBT::Double.new(*@data[i, 8].unpack('G'))
       end
 
       def decode_byte_array(i)
@@ -64,12 +64,12 @@ module Champloo
           _, byte = decode_byte(i + offset)
           bytes << byte
         end
-        return i + len, bytes
+        return i + len, Champloo::NBT::ByteArray.new(bytes)
       end
 
       def decode_string(i)
         i, len = decode_short(i)
-        return i + len, @data[i, len].force_encoding(Encoding::UTF_8)
+        return i + len, Champloo::NBT::String.new(@data[i, len].force_encoding(Encoding::UTF_8))
       end
 
       def decode_list(i)
@@ -82,7 +82,7 @@ module Champloo
           i, item = send(decode_method_name, i)
           list << item
         end
-        return i, list
+        return i, Champloo::NBT::List.new(list)
       end
 
       def decode_compound(i)
@@ -99,7 +99,7 @@ module Champloo
           i, decoded_data[name] = send(decode_method_name, i)
         end
 
-        return i, decoded_data
+        return i, Champloo::NBT::Compound.new(decoded_data)
       end
 
       def decode_int_array(i)
@@ -109,7 +109,7 @@ module Champloo
           i, n = decode_int(i)
           ns << n
         end
-        return i, ns
+        return i, Champloo::NBT::IntArray.new(ns)
       end
 
       def decode_method_name_for(tag_id)

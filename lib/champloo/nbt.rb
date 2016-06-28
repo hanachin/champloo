@@ -1,3 +1,17 @@
+# NBT Tag Types
+require 'delegate'
+require 'champloo/nbt/byte'
+require 'champloo/nbt/short'
+require 'champloo/nbt/int'
+require 'champloo/nbt/long'
+require 'champloo/nbt/float'
+require 'champloo/nbt/double'
+require 'champloo/nbt/byte_array'
+require 'champloo/nbt/string'
+require 'champloo/nbt/list'
+require 'champloo/nbt/compound'
+require 'champloo/nbt/int_array'
+
 require 'champloo/nbt/named_binary_tag'
 require 'champloo/nbt/named_binary_tag_decoder'
 require 'champloo/nbt/named_binary_tag_encoder'
