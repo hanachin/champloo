@@ -19,6 +19,11 @@ module Champloo
       def initialize(data)
         super(self.class.inflate(data))
       end
+
+      def to_binary
+        # TODO return gzipped data
+        super
+      end
     end
   end
 end

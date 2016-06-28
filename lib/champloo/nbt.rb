@@ -1,5 +1,6 @@
 require 'champloo/nbt/named_binary_tag'
 require 'champloo/nbt/named_binary_tag_decoder'
+require 'champloo/nbt/named_binary_tag_encoder'
 require 'champloo/nbt/compressed_named_binary_tag'
 
 module Champloo

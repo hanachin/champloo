@@ -12,6 +12,10 @@ module Champloo
       def initialize(data)
         @data = NamedBinaryTagDecoder.decode(data)
       end
+
+      def to_binary
+        NamedBinaryTagEncoder.encode(self)
+      end
     end
   end
 end
