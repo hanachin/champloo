@@ -73,10 +73,10 @@ module Champloo
       end
 
       def decode_list(i)
-        i, tag_id = decode_byte(i)
+        i, tag_type = decode_byte(i)
         i, len = decode_int(i)
 
-        decode_method_name = decode_method_name_for(tag_id)
+        decode_method_name = decode_method_name_for(tag_type)
         list = []
         len.times do
           i, item = send(decode_method_name, i)
@@ -89,9 +89,9 @@ module Champloo
         decoded_data = {}
 
         while i < @data.size
-          i, tag_id = decode_byte(i)
+          i, tag_type = decode_byte(i)
 
-          decode_method_name = decode_method_name_for(tag_id)
+          decode_method_name = decode_method_name_for(tag_type)
 
           break unless decode_method_name
 
@@ -112,8 +112,8 @@ module Champloo
         return i, Champloo::NBT::IntArray.new(ns)
       end
 
-      def decode_method_name_for(tag_id)
-        case tag_id
+      def decode_method_name_for(tag_type)
+        case tag_type
         when TAG_End
           false
         when TAG_Byte
