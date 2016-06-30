@@ -7,3 +7,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+
+level.dat
+level.dat.Z
+r.0.0.mca
