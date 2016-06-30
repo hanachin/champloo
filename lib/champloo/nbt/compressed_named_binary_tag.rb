@@ -1,4 +1,5 @@
 require 'zlib'
+require 'stringio'
 
 module Champloo
   module NBT
@@ -14,6 +15,13 @@ module Champloo
           end
           buf
         end
+
+        def deflate(data)
+          StringIO.open(''.force_encoding(Encoding::BINARY)) do |out|
+            Zlib::GzipWriter.wrap(out) {|gz| gz.write(data) }
+            out.string.tap {|s| s[4, 6] = 0.chr * 6 }
+          end
+        end
       end
 
       def initialize(data)
@@ -21,8 +29,7 @@ module Champloo
       end
 
       def to_binary
-        # TODO return gzipped data
-        super
+        self.class.deflate(super)
       end
     end
   end
