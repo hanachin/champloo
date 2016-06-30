@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Champloo::NBT::NamedBinaryTagTest < Minitest::Test
   def setup
-    @nbt = Champloo::NBT::NamedBinaryTag.read('level.dat')
+    @nbt = Champloo::NBT::NamedBinaryTag.read('level.dat.uncompressed')
   end
 
   def test_to_binary
