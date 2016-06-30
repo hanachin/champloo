@@ -14,24 +14,16 @@ module Champloo
       end
 
       def decode
-        i, decoded_data = decode_compound(0)
+        i, decoded_data = decode_named_tag(0)
 
         unless i == @data.size
           raise DecodeError
         end
 
-        strip_root(decoded_data)
+        decoded_data
       end
 
       private
-
-      def strip_root(tag)
-        unless tag.keys == ['']
-          raise DecodeError
-        end
-
-        tag['']
-      end
 
       def decode_byte(i)
         return i + 1, Champloo::NBT::Byte.new(*@data[i].unpack('c'))
@@ -89,14 +81,11 @@ module Champloo
         decoded_data = {}
 
         while i < @data.size
-          i, tag_type = decode_byte(i)
+          i, named_tag = decode_named_tag(i)
 
-          decode_method_name = decode_method_name_for(tag_type)
+          break unless named_tag
 
-          break unless decode_method_name
-
-          i, name = decode_string(i)
-          i, decoded_data[name] = send(decode_method_name, i)
+          decoded_data[named_tag.name] = named_tag
         end
 
         return i, Champloo::NBT::Compound.new(decoded_data)
@@ -110,6 +99,18 @@ module Champloo
           ns << n
         end
         return i, Champloo::NBT::IntArray.new(ns)
+      end
+
+      def decode_named_tag(i)
+        i, tag_type = decode_byte(i)
+
+        unless decode_method_name = decode_method_name_for(tag_type)
+          return i, false
+        end
+
+        i, name = decode_string(i)
+        i, decoded_data = send(decode_method_name, i)
+        return i, Champloo::NBT::NamedTag.new(name, decoded_data)
       end
 
       def decode_method_name_for(tag_type)

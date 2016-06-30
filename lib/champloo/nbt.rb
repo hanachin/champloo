@@ -1,4 +1,5 @@
 require 'champloo/nbt/tag'
+require 'champloo/nbt/named_tag'
 
 # NBT Tag Types
 require 'champloo/nbt/byte'
