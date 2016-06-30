@@ -74,7 +74,7 @@ module Champloo
           i, item = send(decode_method_name, i)
           list << item
         end
-        return i, Champloo::NBT::List.new(list)
+        return i, Champloo::NBT::List.new(tag_type, list)
       end
 
       def decode_compound(i)

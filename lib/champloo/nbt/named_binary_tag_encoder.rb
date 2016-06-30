@@ -12,7 +12,7 @@ module Champloo
       end
 
       def encode
-        'TODO'
+        @data.to_binary
       end
     end
   end
