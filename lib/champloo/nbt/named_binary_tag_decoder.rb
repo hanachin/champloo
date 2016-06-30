@@ -78,14 +78,14 @@ module Champloo
       end
 
       def decode_compound(i)
-        decoded_data = {}
+        decoded_data = []
 
         while i < @data.size
           i, named_tag = decode_named_tag(i)
 
           break unless named_tag
 
-          decoded_data[named_tag.name] = named_tag
+          decoded_data << named_tag
         end
 
         return i, Champloo::NBT::Compound.new(decoded_data)
