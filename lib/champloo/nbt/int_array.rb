@@ -1,6 +1,6 @@
 module Champloo
   module NBT
-    class IntArray < SimpleDelegator
+    class IntArray < Tag
       def tag_type
         Champloo::NBT::TAG_Int_Array
       end

@@ -1,6 +1,6 @@
 module Champloo
   module NBT
-    class Long < SimpleDelegator
+    class Long < Tag
       def tag_type
         Champloo::NBT::TAG_Long
       end

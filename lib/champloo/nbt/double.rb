@@ -1,6 +1,6 @@
 module Champloo
   module NBT
-    class Double < SimpleDelegator
+    class Double < Tag
       def tag_type
         Champloo::NBT::TAG_Double
       end

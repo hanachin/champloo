@@ -1,6 +1,6 @@
 module Champloo
   module NBT
-    class String < SimpleDelegator
+    class String < Tag
       def tag_type
         Champloo::NBT::TAG_String
       end

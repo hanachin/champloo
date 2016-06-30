@@ -1,6 +1,6 @@
 module Champloo
   module NBT
-    class List < SimpleDelegator
+    class List < Tag
       def tag_type
         Champloo::NBT::TAG_List
       end

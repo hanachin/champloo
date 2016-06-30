@@ -1,6 +1,6 @@
 module Champloo
   module NBT
-    class Byte < SimpleDelegator
+    class Byte < Tag
       def tag_type
         Champloo::NBT::TAG_Byte
       end

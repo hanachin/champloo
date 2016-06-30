@@ -1,5 +1,6 @@
+require 'champloo/nbt/tag'
+
 # NBT Tag Types
-require 'delegate'
 require 'champloo/nbt/byte'
 require 'champloo/nbt/short'
 require 'champloo/nbt/int'
