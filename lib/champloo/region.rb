@@ -1,5 +1,8 @@
 module Champloo
   class Region
+    COMPRESSION_TYPE_GZIP = 1
+    COMPRESSION_TYPE_ZLIB = 2
+
     attr_reader :data
 
     class << self

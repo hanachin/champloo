@@ -50,7 +50,15 @@ module Champloo
         offset = l[:offset] * SECTOR_SIZE
         length, compression_type = @data[offset, 5].unpack('Nc')
         compressed_data = @data[offset + 5, length - 1]
-        Champloo::NBT::GzippedNamedBinaryTag.new(compressed_data)
+
+        case compression_type
+        when Champloo::Region::COMPRESSION_TYPE_GZIP
+          Champloo::NBT::GzippedNamedBinaryTag.new(compressed_data)
+        when Champloo::Region::COMPRESSION_TYPE_ZLIB
+          raise 'Not supported compression type: Zlib'
+        else
+          raise "Not supported compression type: #{compression_type}"
+        end
       end
     end
   end
