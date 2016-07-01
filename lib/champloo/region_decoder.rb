@@ -50,7 +50,7 @@ module Champloo
         offset = l[:offset] * SECTOR_SIZE
         length, compression_type = @data[offset, 5].unpack('Nc')
         compressed_data = @data[offset + 5, length - 1]
-        Champloo::NBT::CompressedNamedBinaryTag.new(compressed_data)
+        Champloo::NBT::GzippedNamedBinaryTag.new(compressed_data)
       end
     end
   end

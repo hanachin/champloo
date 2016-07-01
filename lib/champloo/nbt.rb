@@ -17,7 +17,7 @@ require 'champloo/nbt/int_array'
 require 'champloo/nbt/named_binary_tag'
 require 'champloo/nbt/named_binary_tag_decoder'
 require 'champloo/nbt/named_binary_tag_encoder'
-require 'champloo/nbt/compressed_named_binary_tag'
+require 'champloo/nbt/gzipped_named_binary_tag'
 
 module Champloo
   module NBT
