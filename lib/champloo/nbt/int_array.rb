@@ -7,7 +7,7 @@ module Champloo
 
       def to_binary
         length = Champloo::NBT::Int.new(self.length)
-        length + map(&:to_binary).join
+        length.to_binary + map(&:to_binary).join
       end
     end
   end
