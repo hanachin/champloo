@@ -6,14 +6,11 @@ module Champloo
     class GzippedNamedBinaryTag < NamedBinaryTag
       class << self
         def inflate(data)
-          begin
-            zstream = Zlib::Inflate.new(Zlib::MAX_WBITS | 32)
-            buf = zstream.inflate(data)
-            zstream.finish
-          ensure
-            zstream.close
+          StringIO.open(data) do |input|
+            Zlib::GzipReader.wrap(input) do |gz|
+              gz.read.force_encoding(Encoding::BINARY)
+            end
           end
-          buf
         end
 
         def deflate(data)
