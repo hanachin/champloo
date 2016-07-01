@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class Champloo::NBT::GzippedNamedBinaryTagTest < Minitest::Test
+class Champloo::NBT::GzipNamedBinaryTagTest < Minitest::Test
   def setup
     @nbt_content = File.binread('level.dat')
-    @nbt = Champloo::NBT::GzippedNamedBinaryTag.new(@nbt_content)
+    @nbt = Champloo::NBT::GzipNamedBinaryTag.new(@nbt_content)
   end
 
   def test_to_binary

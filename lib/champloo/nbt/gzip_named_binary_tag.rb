@@ -3,7 +3,7 @@ require 'stringio'
 
 module Champloo
   module NBT
-    class GzippedNamedBinaryTag < NamedBinaryTag
+    class GzipNamedBinaryTag < NamedBinaryTag
       class << self
         def inflate(data)
           StringIO.open(data) do |input|

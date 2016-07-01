@@ -53,7 +53,7 @@ module Champloo
 
         case compression_type
         when Champloo::Anvil::COMPRESSION_TYPE_GZIP
-          Champloo::NBT::GzippedNamedBinaryTag.new(compressed_data)
+          Champloo::NBT::GzipNamedBinaryTag.new(compressed_data)
         when Champloo::Anvil::COMPRESSION_TYPE_ZLIB
           Champloo::NBT::ZlibNamedBinaryTag.new(compressed_data)
         else
