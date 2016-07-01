@@ -20,11 +20,7 @@ module Champloo
       @timestamps = decode_timestamps
       @chunks = decode_chunks
 
-      {
-        locations: @locations,
-        timestamps: @timestamps,
-        chunks: @chunks,
-      }
+      Champloo::Anvil::Data.new(@locations, @timestamps, @chunks)
     end
 
     def decode_locations
