@@ -1,5 +1,5 @@
 module Champloo
-  class RegionDecoder
+  class AnvilDecoder
     MAX_CHUNK_NUM = 1024
     SECTOR_SIZE = 1024 * 4
     LOCATIONS_SIZE = 1024 * 4
@@ -52,9 +52,9 @@ module Champloo
         compressed_data = @data[offset + 5, length - 1]
 
         case compression_type
-        when Champloo::Region::COMPRESSION_TYPE_GZIP
+        when Champloo::Anvil::COMPRESSION_TYPE_GZIP
           Champloo::NBT::GzippedNamedBinaryTag.new(compressed_data)
-        when Champloo::Region::COMPRESSION_TYPE_ZLIB
+        when Champloo::Anvil::COMPRESSION_TYPE_ZLIB
           raise 'Not supported compression type: Zlib'
         else
           raise "Not supported compression type: #{compression_type}"

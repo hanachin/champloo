@@ -1,5 +1,5 @@
 module Champloo
-  class Region
+  class Anvil
     COMPRESSION_TYPE_GZIP = 1
     COMPRESSION_TYPE_ZLIB = 2
 
@@ -12,7 +12,7 @@ module Champloo
     end
 
     def initialize(data)
-      @data = RegionDecoder.decode(data)
+      @data = AnvilDecoder.decode(data)
     end
   end
 end
