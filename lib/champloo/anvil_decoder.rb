@@ -55,7 +55,7 @@ module Champloo
         when Champloo::Anvil::COMPRESSION_TYPE_GZIP
           Champloo::NBT::GzippedNamedBinaryTag.new(compressed_data)
         when Champloo::Anvil::COMPRESSION_TYPE_ZLIB
-          raise 'Not supported compression type: Zlib'
+          Champloo::NBT::ZlibNamedBinaryTag.new(compressed_data)
         else
           raise "Not supported compression type: #{compression_type}"
         end

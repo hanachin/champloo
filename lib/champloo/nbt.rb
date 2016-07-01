@@ -18,6 +18,7 @@ require 'champloo/nbt/named_binary_tag'
 require 'champloo/nbt/named_binary_tag_decoder'
 require 'champloo/nbt/named_binary_tag_encoder'
 require 'champloo/nbt/gzipped_named_binary_tag'
+require 'champloo/nbt/zlib_named_binary_tag'
 
 module Champloo
   module NBT
