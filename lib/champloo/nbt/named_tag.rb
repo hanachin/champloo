@@ -18,6 +18,14 @@ module Champloo
         name = Champloo::NBT::String.new(@name)
         tag_type.to_binary + name.to_binary + super
       end
+
+      def inspect
+        {Name: name, Tag: __getobj__}.inspect
+      end
+
+      def pretty_print(q)
+        q.pp({Name: name, Tag: __getobj__})
+      end
     end
   end
 end
