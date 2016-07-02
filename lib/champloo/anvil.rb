@@ -1,12 +1,11 @@
+require 'delegate'
 require 'champloo/anvil_decoder'
 require 'champloo/anvil_encoder'
 
 module Champloo
-  class Anvil
+  class Anvil < SimpleDelegator
     COMPRESSION_TYPE_GZIP = 1
     COMPRESSION_TYPE_ZLIB = 2
-
-    attr_reader :data
 
     class << self
       def read(file_path)
@@ -15,7 +14,7 @@ module Champloo
     end
 
     def initialize(data)
-      @data = AnvilDecoder.decode(data)
+      super(AnvilDecoder.decode(data))
     end
 
     def to_binary
