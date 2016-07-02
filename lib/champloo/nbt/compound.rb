@@ -13,6 +13,10 @@ module Champloo
         end
       end
 
+      def keys
+        map(&:name)
+      end
+
       def to_binary
         tag_end = Champloo::NBT::Byte.new(Champloo::NBT::TAG_End)
         map(&:to_binary).join + tag_end.to_binary
