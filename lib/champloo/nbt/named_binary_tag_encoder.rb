@@ -3,16 +3,16 @@ module Champloo
     class NamedBinaryTagEncoder
       class << self
         def encode(nbt)
-          new(nbt.data).encode
+          new(nbt).encode
         end
       end
 
-      def initialize(data)
-        @data = data
+      def initialize(nbt)
+        @nbt = nbt
       end
 
       def encode
-        @data.to_binary
+        @nbt.__getobj__.to_binary
       end
     end
   end
