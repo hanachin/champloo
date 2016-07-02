@@ -1,3 +1,5 @@
+require 'champloo/anvil/data'
+
 module Champloo
   class AnvilDecoder
     MAX_CHUNK_NUM = 1024

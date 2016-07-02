@@ -1,3 +1,6 @@
+require 'champloo/anvil_decoder'
+require 'champloo/anvil_encoder'
+
 module Champloo
   class Anvil
     COMPRESSION_TYPE_GZIP = 1
