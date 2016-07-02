@@ -23,7 +23,8 @@ module Champloo
     end
 
     def encode_chunks
-      data.chunks.compact.map {|nbt|
+      data.chunks.map {|nbt|
+        next "\x00".force_encoding(Encoding::BINARY) * 4096 if nbt.nil?
         compressed_data = nbt.to_binary
         compression_type =
           case nbt
