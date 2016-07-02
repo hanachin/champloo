@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'champloo'
+
+unless path = ARGV.first
+  puts <<~USAGE
+  Usage: grass2diamond_block FILE.mca
+  USAGE
+  exit 1
+end
+
+mca = Champloo::Anvil.read(path)
+
+mca.chunks.compact.each_with_index do |c|
+  c[:Level][:Sections].each do |s|
+    s[:Blocks].each_with_index do |b, i|
+      if b == Champloo::Block::Grass
+        s[:Blocks][i] = Champloo::NBT::Byte.new(Champloo::Block::DiamondBlock)
+      end
+    end
+  end
+end
+
+File.write(path, mca.to_binary)
