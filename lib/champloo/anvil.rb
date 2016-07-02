@@ -14,5 +14,9 @@ module Champloo
     def initialize(data)
       @data = AnvilDecoder.decode(data)
     end
+
+    def to_binary
+      AnvilEncoder.encode(self)
+    end
   end
 end

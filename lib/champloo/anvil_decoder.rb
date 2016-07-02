@@ -40,7 +40,8 @@ module Champloo
     def decode_chunks
       header_offset = LOCATIONS_SIZE + TIMESTAMPS_SIZE
 
-      @locations.map do |l|
+      locations = @locations.reject {|l| l[:offset].zero? && l[:sector_count].zero? }
+      locations.sort_by {|l| l.fetch(:offset) }.map do |l|
         next nil if l[:offset].zero? && l[:sector_count].zero?
 
         offset = l[:offset] * SECTOR_SIZE
