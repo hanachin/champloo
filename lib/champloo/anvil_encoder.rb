@@ -38,7 +38,12 @@ module Champloo
         bytes = [compressed_data.bytesize + 1, compression_type].pack('Nc') + compressed_data
 
         # padding
-        bytes + "\x00".force_encoding(Encoding::BINARY) * (4096 - bytes.bytesize.divmod(4096).last)
+        padding = bytes.bytesize.divmod(4096).last
+        if padding.nonzero?
+          bytes << "\x00".force_encoding(Encoding::BINARY) * (4096 - padding)
+        end
+
+        bytes
       }.join
     end
 
