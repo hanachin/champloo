@@ -25,7 +25,7 @@ module Champloo
 
       def encode_chunks
         @anvil.chunks.map {|nbt|
-          next "\x00".force_encoding(Encoding::BINARY) * 4096 if nbt.nil?
+          next "\x00".force_encoding(Encoding::BINARY) * SECTOR_SIZE if nbt.nil?
           compressed_data = nbt.to_binary
           compression_type =
             case nbt
@@ -39,9 +39,9 @@ module Champloo
           bytes = [compressed_data.bytesize + 1, compression_type].pack('Nc') + compressed_data
 
           # padding
-          padding = bytes.bytesize.divmod(4096).last
+          padding = bytes.bytesize.divmod(SECTOR_SIZE).last
           if padding.nonzero?
-            bytes << "\x00".force_encoding(Encoding::BINARY) * (4096 - padding)
+            bytes << "\x00".force_encoding(Encoding::BINARY) * (SECTOR_SIZE - padding)
           end
 
           bytes
