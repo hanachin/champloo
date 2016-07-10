@@ -3,11 +3,6 @@ require 'champloo/anvil/data'
 module Champloo
   module Anvil
     class Decoder
-      MAX_CHUNK_NUM = 1024
-      SECTOR_SIZE = 1024 * 4
-      LOCATIONS_SIZE = 1024 * 4
-      TIMESTAMPS_SIZE = 1024 * 4
-
       class << self
         def decode(data)
           new(data).decode
