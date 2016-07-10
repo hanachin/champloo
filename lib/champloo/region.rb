@@ -14,7 +14,7 @@ module Champloo
     end
 
     def to_binary
-      AnvilEncoder.encode(self)
+      AnvilEncoder.encode(self.__getobj__)
     end
   end
 end

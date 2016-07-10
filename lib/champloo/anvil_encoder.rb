@@ -15,15 +15,15 @@ module Champloo
     end
 
     def encode_locations
-      data.locations.map {|loc| (loc.fetch(:offset) << 8) | loc.fetch(:sector_count) }.pack('N*')
+      @anvil.locations.map {|loc| (loc.fetch(:offset) << 8) | loc.fetch(:sector_count) }.pack('N*')
     end
 
     def encode_timestamps
-      data.timestamps.map {|time| time.to_i }.pack('N*')
+      @anvil.timestamps.map {|time| time.to_i }.pack('N*')
     end
 
     def encode_chunks
-      data.chunks.map {|nbt|
+      @anvil.chunks.map {|nbt|
         next "\x00".force_encoding(Encoding::BINARY) * 4096 if nbt.nil?
         compressed_data = nbt.to_binary
         compression_type =
@@ -45,10 +45,6 @@ module Champloo
 
         bytes
       }.join
-    end
-
-    def data
-      @anvil.__getobj__
     end
   end
 end
