@@ -10,11 +10,11 @@ module Champloo
     end
 
     def initialize(data)
-      super(AnvilDecoder.decode(data))
+      super(Champloo::Anvil::Decoder.decode(data))
     end
 
     def to_binary
-      AnvilEncoder.encode(self.__getobj__)
+      Champloo::Anvil::Encoder.encode(self.__getobj__)
     end
   end
 end

@@ -1,5 +1,5 @@
-require 'champloo/anvil_decoder'
-require 'champloo/anvil_encoder'
+require 'champloo/anvil/decoder'
+require 'champloo/anvil/encoder'
 
 module Champloo
   module Anvil
