@@ -1,6 +1,6 @@
 require 'champloo/version'
 require 'champloo/nbt'
-require 'champloo/anvil'
+require 'champloo/region'
 require 'champloo/biome'
 require 'champloo/block'
 

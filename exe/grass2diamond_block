@@ -9,7 +9,7 @@ unless path = ARGV.first
   exit 1
 end
 
-mca = Champloo::Anvil.read(path)
+mca = Champloo::Region.read(path)
 
 mca.chunks.compact.each_with_index do |c|
   c[:Level][:Sections].each do |s|

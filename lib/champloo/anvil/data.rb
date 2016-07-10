@@ -1,7 +1,5 @@
-require 'delegate'
-
 module Champloo
-  class Anvil < SimpleDelegator
+  module Anvil
     Data = Struct.new(:locations, :timestamps, :chunks)
   end
 end
