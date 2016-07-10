@@ -45,14 +45,18 @@ module Champloo
           length, compression_type = @data[offset, 5].unpack('Nc')
           compressed_data = @data[offset + 5, length - 1]
 
-          case compression_type
-          when Champloo::Anvil::COMPRESSION_TYPE_GZIP
-            Champloo::NBT::GzipNamedBinaryTag.new(compressed_data)
-          when Champloo::Anvil::COMPRESSION_TYPE_ZLIB
-            Champloo::NBT::ZlibNamedBinaryTag.new(compressed_data)
-          else
-            raise "Not supported compression type: #{compression_type}"
-          end
+          nbt_decoder_for(compression_type).new(compressed_data)
+        end
+      end
+
+      def nbt_decoder_for(compression_type)
+        case compression_type
+        when Champloo::Anvil::COMPRESSION_TYPE_GZIP
+          Champloo::NBT::GzipNamedBinaryTag
+        when Champloo::Anvil::COMPRESSION_TYPE_ZLIB
+          Champloo::NBT::ZlibNamedBinaryTag
+        else
+          raise "Not supported compression type: #{compression_type}"
         end
       end
     end
