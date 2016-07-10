@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "minitest-power_assert"
   spec.add_development_dependency "stackprof"
+  spec.add_development_dependency "benchmark-ips"
 end
