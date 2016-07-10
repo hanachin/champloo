@@ -24,28 +24,38 @@ module Champloo
       end
 
       def encode_chunks
-        @anvil.chunks.map {|nbt|
-          next "\x00".force_encoding(Encoding::BINARY) * SECTOR_SIZE if nbt.nil?
-          compressed_data = nbt.to_binary
-          compression_type =
-            case nbt
-            when Champloo::NBT::GzipNamedBinaryTag
-              Champloo::Anvil::COMPRESSION_TYPE_GZIP
-            when Champloo::NBT::ZlibNamedBinaryTag
-              Champloo::Anvil::COMPRESSION_TYPE_ZLIB
-            else
-              raise "Not supported NBT type: #{nbt.class.name}"
-            end
-          bytes = [compressed_data.bytesize + 1, compression_type].pack('Nc') + compressed_data
-
-          # padding
-          padding = bytes.bytesize.divmod(SECTOR_SIZE).last
-          if padding.nonzero?
-            bytes << "\x00".force_encoding(Encoding::BINARY) * (SECTOR_SIZE - padding)
-          end
-
-          bytes
+        @anvil.chunks.map {|chunk_nbt|
+          next "\x00".force_encoding(Encoding::BINARY) * SECTOR_SIZE if chunk_nbt.nil?
+          encode_chunk(chunk_nbt)
         }.join
+      end
+
+      def encode_chunk(chunk_nbt)
+        compressed_data  = chunk_nbt.to_binary
+        compression_type = compression_type_for(chunk_nbt)
+        chunk_header     = [compressed_data.bytesize + 1, compression_type].pack('Nc')
+        padding(chunk_header + compressed_data)
+      end
+
+      def compression_type_for(nbt)
+        case nbt
+        when Champloo::NBT::GzipNamedBinaryTag
+          Champloo::Anvil::COMPRESSION_TYPE_GZIP
+        when Champloo::NBT::ZlibNamedBinaryTag
+          Champloo::Anvil::COMPRESSION_TYPE_ZLIB
+        else
+          raise "Not supported NBT type: #{nbt.class.name}"
+        end
+      end
+
+      def padding(bytes)
+        r = bytes.bytesize % SECTOR_SIZE
+
+        if r.nonzero?
+          bytes << "\x00".force_encoding(Encoding::BINARY) * (SECTOR_SIZE - r)
+        end
+
+        bytes
       end
     end
   end
