@@ -1,4 +1,5 @@
 require 'champloo/anvil/data'
+require 'champloo/anvil/location'
 
 module Champloo
   module Anvil
@@ -22,10 +23,8 @@ module Champloo
       end
 
       def decode_locations
-        @data[0, LOCATIONS_SIZE].unpack('N*').map do |bytes|
-          offset = bytes >> 8
-          sector_count = bytes & 0xFF
-          {offset: offset, sector_count: sector_count}
+        @data[0, LOCATIONS_SIZE].unpack('N*').map do |x|
+          Champloo::Anvil::Location.new(x)
         end
       end
 
@@ -38,11 +37,11 @@ module Champloo
       def decode_chunks
         header_offset = LOCATIONS_SIZE + TIMESTAMPS_SIZE
 
-        locations = @locations.reject {|l| l[:offset].zero? && l[:sector_count].zero? }
-        locations.sort_by {|l| l.fetch(:offset) }.map do |l|
-          next nil if l[:offset].zero? && l[:sector_count].zero?
+        locations = @locations.reject {|l| l.offset.zero? && l.sector_count.zero? }
+        locations.sort_by(&:offset).map do |l|
+          next nil if l.offset.zero? && l.sector_count.zero?
 
-          offset = l[:offset] * SECTOR_SIZE
+          offset = l.offset * SECTOR_SIZE
           length, compression_type = @data[offset, 5].unpack('Nc')
           compressed_data = @data[offset + 5, length - 1]
 

@@ -16,7 +16,7 @@ module Champloo
       end
 
       def encode_locations
-        @anvil.locations.map {|loc| (loc.fetch(:offset) << 8) | loc.fetch(:sector_count) }.pack('N*')
+        @anvil.locations.map(&:to_i).pack('N*')
       end
 
       def encode_timestamps

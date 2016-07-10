@@ -1,3 +1,4 @@
+require 'champloo/anvil/location'
 require 'champloo/anvil/decoder'
 require 'champloo/anvil/encoder'
 
