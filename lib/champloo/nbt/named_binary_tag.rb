@@ -13,6 +13,10 @@ module Champloo
         super(Champloo::NBT::Decoder.decode(data))
       end
 
+      def root
+        __getobj__
+      end
+
       def to_binary
         Champloo::NBT::Encoder.encode(self)
       end

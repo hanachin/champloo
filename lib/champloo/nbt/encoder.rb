@@ -12,7 +12,7 @@ module Champloo
       end
 
       def encode
-        @nbt.__getobj__.to_binary
+        @nbt.root.to_binary
       end
     end
   end
