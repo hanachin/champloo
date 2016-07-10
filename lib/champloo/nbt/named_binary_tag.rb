@@ -10,11 +10,11 @@ module Champloo
       end
 
       def initialize(data)
-        super(NamedBinaryTagDecoder.decode(data))
+        super(Champloo::NBT::Decoder.decode(data))
       end
 
       def to_binary
-        NamedBinaryTagEncoder.encode(self)
+        Champloo::NBT::Encoder.encode(self)
       end
     end
   end

@@ -1,6 +1,6 @@
 module Champloo
   module NBT
-    class NamedBinaryTagEncoder
+    class Encoder
       class << self
         def encode(nbt)
           new(nbt).encode

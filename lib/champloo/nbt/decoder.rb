@@ -1,6 +1,6 @@
 module Champloo
   module NBT
-    class NamedBinaryTagDecoder
+    class Decoder
       class DecodeError < StandardError; end
 
       class << self

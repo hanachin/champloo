@@ -15,8 +15,8 @@ require 'champloo/nbt/compound'
 require 'champloo/nbt/int_array'
 
 require 'champloo/nbt/named_binary_tag'
-require 'champloo/nbt/named_binary_tag_decoder'
-require 'champloo/nbt/named_binary_tag_encoder'
+require 'champloo/nbt/decoder'
+require 'champloo/nbt/encoder'
 require 'champloo/nbt/gzip_named_binary_tag'
 require 'champloo/nbt/zlib_named_binary_tag'
 
